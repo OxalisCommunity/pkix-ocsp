@@ -1,5 +1,5 @@
 ### ALERT
-This implementation is based on Original version from klakegg / pkix-ocsp (https://github.com/klakegg/pkix-ocsp)
+This implementation is based on Original version from klakegg / pkix-ocsp version 0.9.1 (https://github.com/klakegg/pkix-ocsp)
 
 
 # OCSP Client
