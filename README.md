@@ -1,11 +1,9 @@
-### ALERT
+### Note
 This implementation is based on Original version from klakegg / pkix-ocsp version 0.9.1 (https://github.com/klakegg/pkix-ocsp)
 
 
 # OCSP Client
 
-[![Build Status](https://travis-ci.org/klakegg/pkix-ocsp.svg?branch=master)](https://travis-ci.org/klakegg/pkix-ocsp)
-[![Codecov](https://codecov.io/gh/klakegg/pkix-ocsp/branch/master/graph/badge.svg)](https://codecov.io/gh/klakegg/pkix-ocsp)
 
 
 ## Getting started
@@ -14,9 +12,9 @@ Include dependency in your pom.xml:
 
 ```xml
 <dependency>
-    <groupId>net.klakegg.pkix</groupId>
+    <groupId>network.oxalis</groupId>
     <artifactId>pkix-ocsp</artifactId>
-    <version>0.9.0</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 

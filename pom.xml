@@ -2,32 +2,46 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>net.klakegg.pkix</groupId>
+    <groupId>network.oxalis</groupId>
     <artifactId>pkix-ocsp</artifactId>
     <version>0.9.2-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-    <name>PKIX :: OCSP Client</name>
-    <description>Configurable OCSP client.</description>
-    <url>https://github.com/klakegg/pkix-ocsp</url>
+    <name>Oxalis PKIX OCSP Client implementation</name>
+    <description>Configurable Oxalis PKIX OCSP Client implementation</description>
+    <url>https://github.com/OxalisCommunity/pkix-ocsp</url>
 
     <properties>
         <java.encoding>UTF-8</java.encoding>
-        <java.version>1.7</java.version>
+        <java.version>1.8</java.version>
     </properties>
 
     <scm>
         <tag>HEAD</tag>
-        <url>https://github.com/klakegg/pkix-ocsp</url>
-        <connection>scm:git:https://github.com/klakegg/pkix-ocsp.git</connection>
-        <developerConnection>scm:git:git@github.com:klakegg/pkix-ocsp.git</developerConnection>
+        <url>https://github.com/OxalisCommunity/pkix-ocsp</url>
+        <connection>scm:git:https://github.com/OxalisCommunity/pkix-ocsp.git</connection>
+        <developerConnection>scm:git:git@github.com:OxalisCommunity/pkix-ocsp.git</developerConnection>
     </scm>
 
     <issueManagement>
-        <url>https://github.com/klakegg/pkix-ocsp/issues</url>
+        <url>https://github.com/OxalisCommunity/pkix-ocsp/issues</url>
         <system>GitHub Issues</system>
     </issueManagement>
 
+    <organization>
+        <name>NorStella</name>
+        <url>https://en.norstella.no/</url>
+    </organization>
+
     <developers>
+        <developer>
+            <name>Arun Kumar</name>
+            <email>arun.kaundal@gmail.com</email>
+            <organization>Norstella</organization>
+            <roles>
+                <role>Oxalis Technical Expert</role>
+            </roles>
+        </developer>
         <developer>
             <name>Erlend Klakegg Bergheim</name>
             <roles>
@@ -49,14 +63,14 @@
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcpkix-jdk15on</artifactId>
-            <version>1.57</version>
+            <version>1.70</version>
         </dependency>
 
         <!-- Apache HTTP Client -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.3</version>
+            <version>4.5.13</version>
             <scope>provided</scope>
         </dependency>
 
@@ -64,13 +78,13 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.10</version>
+            <version>6.14.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>2.8.47</version>
+            <version>2.28.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -91,6 +105,27 @@
                 <version>2.7</version>
                 <configuration>
                     <encoding>${java.encoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <id>set-additional-system-properties</id>
+                        <goals>
+                            <goal>set-system-properties</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <properties>
+                        <property>
+                            <name>javax.xml.accessExternalSchema</name>
+                            <value>all</value>
+                        </property>
+                    </properties>
                 </configuration>
             </plugin>
             <plugin>
@@ -144,27 +179,24 @@
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-release-plugin</artifactId>
-                    </plugin>
-                    <plugin>
                         <artifactId>maven-source-plugin</artifactId>
                         <version>2.4</version>
                         <executions>
                             <execution>
-                                <id>package-sources</id>
+                                <id>attach-sources</id>
                                 <goals>
-                                    <goal>jar</goal>
+                                    <goal>jar-no-fork</goal>
                                 </goals>
                             </execution>
                         </executions>
                     </plugin>
                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>2.10.3</version>
+                        <version>3.2.0</version>
                         <executions>
                             <execution>
-                                <id>package-javadoc</id>
-                                <phase>package</phase>
+                                <id>attach-javadocs</id>
                                 <goals>
                                     <goal>jar</goal>
                                 </goals>
@@ -172,12 +204,22 @@
                         </executions>
                         <configuration>
                             <encoding>${java.encoding}</encoding>
+                            <additionalOptions>
+                                <additionalOption>-Xdoclint:none</additionalOption>
+                            </additionalOptions>
                         </configuration>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <version>1.6</version>
+                        <configuration>
+                            <!-- Prevent gpg from using pinentry programs -->
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
