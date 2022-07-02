@@ -1,7 +1,3 @@
-### Note
-This implementation is based on Original version from klakegg / pkix-ocsp version 0.9.1 (https://github.com/klakegg/pkix-ocsp)
-
-
 # OCSP Client
 
 
@@ -33,3 +29,6 @@ CertificateResult response = client.verify(certificate, issuer);
 // Prints 'GOOD', 'REVOKED' or 'UNKNOWN'.
 System.out.println(response.getStatus());
 ```
+
+### Note
+This implementation is based on Original version from klakegg / pkix-ocsp version 0.9.1 (https://github.com/klakegg/pkix-ocsp)
