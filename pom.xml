@@ -16,7 +16,7 @@
 
     <groupId>network.oxalis</groupId>
     <artifactId>pkix-ocsp</artifactId>
-    <version>1.0.0-RC1</version>
+    <version>1.0.0-RC2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Oxalis PKIX OCSP Client implementation</name>
@@ -29,7 +29,7 @@
     </properties>
 
     <scm>
-        <tag>v1.0.0-RC1</tag>
+        <tag>HEAD</tag>
         <url>https://github.com/OxalisCommunity/pkix-ocsp</url>
         <connection>scm:git:https://github.com/OxalisCommunity/pkix-ocsp.git</connection>
         <developerConnection>scm:git:git@github.com:OxalisCommunity/pkix-ocsp.git</developerConnection>
