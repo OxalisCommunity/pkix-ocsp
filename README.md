@@ -9,7 +9,7 @@ Include dependency in your pom.xml:
 ```xml
 <dependency>
     <groupId>network.oxalis</groupId>
-    <artifactId>pkix-ocsp</artifactId>
+    <artifactId>oxalis-ocsp</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```

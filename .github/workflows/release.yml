@@ -1,4 +1,4 @@
-name: pkix-ocsp Release publish
+name: oxalis-ocsp Release publish
 on:
   release:
     types: [created]
