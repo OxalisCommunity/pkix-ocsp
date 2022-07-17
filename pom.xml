@@ -15,13 +15,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>network.oxalis.pkix</groupId>
-    <artifactId>ocsp</artifactId>
+    <artifactId>pkix-ocsp</artifactId>
     <version>1.0.0-RC3-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Oxalis PKIX OCSP Client implementation</name>
     <description>Configurable Oxalis PKIX OCSP Client implementation</description>
-    <url>https://github.com/OxalisCommunity/ocsp</url>
+    <url>https://github.com/OxalisCommunity/pkix-ocsp</url>
 
     <properties>
         <java.encoding>UTF-8</java.encoding>
@@ -30,13 +30,13 @@
 
     <scm>
         <tag>HEAD</tag>
-        <url>https://github.com/OxalisCommunity/ocsp</url>
-        <connection>scm:git:git@github.com:OxalisCommunity/ocsp.git</connection>
-        <developerConnection>scm:git:git@github.com:OxalisCommunity/ocsp.git</developerConnection>
+        <url>https://github.com/OxalisCommunity/pkix-ocsp</url>
+        <connection>scm:git:git@github.com:OxalisCommunity/pkix-ocsp.git</connection>
+        <developerConnection>scm:git:git@github.com:OxalisCommunity/pkix-ocsp.git</developerConnection>
     </scm>
 
     <issueManagement>
-        <url>https://github.com/OxalisCommunity/ocsp/issues</url>
+        <url>https://github.com/OxalisCommunity/pkix-ocsp/issues</url>
         <system>GitHub Issues</system>
     </issueManagement>
 

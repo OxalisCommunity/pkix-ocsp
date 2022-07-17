@@ -1,4 +1,4 @@
-name: oxalis-ocsp Master Build
+name: pkix-ocsp Master Build
 
 on: [push]
 

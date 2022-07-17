@@ -1,4 +1,4 @@
-name: oxalis-ocsp Snapshot publish
+name: pkix-ocsp Snapshot publish
 
 on: [push]
 
