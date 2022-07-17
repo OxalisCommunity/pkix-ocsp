@@ -8,8 +8,8 @@ Include dependency in your pom.xml:
 
 ```xml
 <dependency>
-    <groupId>network.oxalis</groupId>
-    <artifactId>oxalis-ocsp</artifactId>
+    <groupId>network.oxalis.pkix</groupId>
+    <artifactId>ocsp</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```
@@ -24,11 +24,14 @@ OcspClient client = OcspClient.builder()
         .build();
 
 // Verify certificate (issuer certificate required).
-CertificateResult response = client.verify(certificate, issuer);
+        CertificateResult response = client.verify(certificate, issuer);
 
 // Prints 'GOOD', 'REVOKED' or 'UNKNOWN'.
-System.out.println(response.getStatus());
+        System.out.println(response.getStatus());
 ```
 
+
+
+---
 ### Note
 This implementation is based on Original version from klakegg / pkix-ocsp version 0.9.1 (https://github.com/klakegg/pkix-ocsp)
