@@ -25,6 +25,7 @@ import java.util.List;
  * This abstract class implements common features related to OCSP verification.
  *
  * @author erlend
+ * @author aaron-kumar
  */
 class AbstractOcspClient {
 

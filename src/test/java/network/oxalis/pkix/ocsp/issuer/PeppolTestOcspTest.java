@@ -12,6 +12,7 @@ import java.util.Collections;
 
 /**
  * @author erlend
+ * @author aaron-kumar
  */
 public class PeppolTestOcspTest {
 
@@ -24,7 +25,7 @@ public class PeppolTestOcspTest {
     private X509Certificate issuer =
             CertificateHelper.parse(getClass().getResourceAsStream("/peppol-ap-test/issuer.cer"));
 
-    @Test(enabled = false)
+    @Test
     public void simple() throws OcspException {
         OcspClient ocspClient = OcspClient.builder()
                 .build();
@@ -32,7 +33,7 @@ public class PeppolTestOcspTest {
         Assert.assertEquals(ocspClient.verify(subjectValid, issuer).getStatus(), CertificateStatus.GOOD);
     }
 
-    @Test(enabled = false)
+    @Test
     public void providedIssuers() throws OcspException {
         OcspClient ocspClient = OcspClient.builder()
                 .set(OcspClient.INTERMEDIATES, Collections.singletonList(issuer))

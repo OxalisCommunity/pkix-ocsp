@@ -16,26 +16,26 @@ import java.util.Collections;
  */
 public class PeppolProdMultiOcspTest {
 
-    private X509Certificate subjectValid01 =
-            CertificateHelper.parse(getClass().getResourceAsStream("/peppol-ap-prod/certificate-valid-01.cer"));
+    private X509Certificate subjectExpired =
+            CertificateHelper.parse(getClass().getResourceAsStream("/peppol-ap-prod/certificate-expired.cer"));
 
-    private X509Certificate subjectValid02 =
-            CertificateHelper.parse(getClass().getResourceAsStream("/peppol-ap-prod/certificate-valid-02.cer"));
+    private X509Certificate subjectValid =
+            CertificateHelper.parse(getClass().getResourceAsStream("/peppol-ap-prod/certificate-valid.cer"));
 
     private X509Certificate issuer =
             CertificateHelper.parse(getClass().getResourceAsStream("/peppol-ap-prod/issuer.cer"));
 
-    @Test(enabled = false)
+    @Test
     public void simple() throws OcspException {
         OcspMultiClient ocspMultiClient = OcspMultiClient.builder()
                 .set(OcspMultiClient.INTERMEDIATES, Collections.singletonList(issuer))
                 .build();
 
         OcspResult ocspResult = ocspMultiClient.verify(
-                subjectValid01, subjectValid02
+                subjectValid, subjectExpired
         );
 
-        Assert.assertEquals(ocspResult.get(subjectValid01).getStatus(), CertificateStatus.GOOD);
-        Assert.assertNull(ocspResult.get(subjectValid02)); // Multi not supported
+        Assert.assertEquals(ocspResult.get(subjectValid).getStatus(), CertificateStatus.GOOD);
+        Assert.assertNull(ocspResult.get(subjectExpired)); // Multi not supported
     }
 }

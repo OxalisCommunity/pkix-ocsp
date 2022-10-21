@@ -13,6 +13,7 @@ import java.util.Collections;
 
 /**
  * @author erlend
+ * @author aaron-kumar
  */
 public class PeppolTestMultiOcspTest {
 
@@ -25,7 +26,7 @@ public class PeppolTestMultiOcspTest {
     private X509Certificate issuer =
             CertificateHelper.parse(getClass().getResourceAsStream("/peppol-ap-test/issuer.cer"));
 
-    @Test(enabled = false)
+    @Test
     public void simple() throws OcspException {
         OcspMultiClient ocspMultiClient = OcspMultiClient.builder()
                 .set(OcspMultiClient.INTERMEDIATES, Collections.singletonList(issuer))

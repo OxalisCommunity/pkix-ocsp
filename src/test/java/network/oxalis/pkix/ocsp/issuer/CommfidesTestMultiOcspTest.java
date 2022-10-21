@@ -13,6 +13,7 @@ import java.util.Collections;
 
 /**
  * @author erlend
+ * @author aaron-kumar
  */
 public class CommfidesTestMultiOcspTest {
 
@@ -25,7 +26,7 @@ public class CommfidesTestMultiOcspTest {
     private X509Certificate issuer =
             CertificateHelper.parse(getClass().getResourceAsStream("/commfides-test/issuer.cer"));
 
-    @Test
+    @Test(enabled = false)
     public void simple() throws OcspException {
         OcspMultiClient ocspMultiClient = OcspMultiClient.builder()
                 .set(OcspMultiClient.INTERMEDIATES, Collections.singletonList(issuer))

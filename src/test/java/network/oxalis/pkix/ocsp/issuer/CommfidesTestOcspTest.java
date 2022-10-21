@@ -11,6 +11,7 @@ import java.security.cert.X509Certificate;
 
 /**
  * @author erlend
+ * @author aaron-kumar
  */
 public class CommfidesTestOcspTest {
 
@@ -23,7 +24,7 @@ public class CommfidesTestOcspTest {
     private X509Certificate issuer =
             CertificateHelper.parse(getClass().getResourceAsStream("/commfides-test/issuer.cer"));
 
-    @Test
+    @Test(enabled = false)
     public void simpleUnknown() throws OcspException {
         OcspClient ocspClient = OcspClient.builder()
                 .set(OcspClient.EXCEPTION_ON_REVOKED, false)
@@ -38,7 +39,7 @@ public class CommfidesTestOcspTest {
     }
 
     @SuppressWarnings("Duplicates")
-    @Test
+    @Test(enabled = false)
     public void simpleValid() throws OcspException {
         OcspClient ocspClient = OcspClient.builder()
                 .build();
