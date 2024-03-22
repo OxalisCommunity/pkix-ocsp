@@ -28,7 +28,7 @@
         <java.version>11</java.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <bouncycastle.version>1.70</bouncycastle.version>
+        <bouncycastle.version>1.77</bouncycastle.version>
         <httpclient.version>4.5.13</httpclient.version>
         <testng.version>7.7.1</testng.version>
         <mockito-core.version>4.11.0</mockito-core.version>
@@ -80,7 +80,7 @@
         <!-- BouncyCastle -->
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcpkix-jdk15on</artifactId>
+            <artifactId>bcpkix-jdk18on</artifactId>
             <version>${bouncycastle.version}</version>
         </dependency>
 
