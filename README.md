@@ -1,4 +1,4 @@
-[![pkix-ocsp Master Build](https://github.com/OxalisCommunity/pkix-ocsp//workflows/pkix-ocsp%20Master%20Build/badge.svg?branch=master)](https://github.com/OxalisCommunity/pkix-ocsp/actions?query=workflow%3A%22pkix-ocsp%20Master%20Build%22)
+[![pkix-ocsp Master Build](https://github.com/OxalisCommunity/pkix-ocsp//workflows/pkix-ocsp%20Master%20Build/badge.svg)](https://github.com/OxalisCommunity/pkix-ocsp/actions?query=workflow%3A%22pkix-ocsp%20Master%20Build%22)
 [![Maven Central](https://img.shields.io/maven-central/v/network.oxalis.pkix/pkix-ocsp.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22network.oxalis.pkix%22%20AND%20a%3A%22pkix-ocsp%22)
 
 
