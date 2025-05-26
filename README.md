@@ -14,7 +14,7 @@ Include dependency in your pom.xml:
 <dependency>
     <groupId>network.oxalis.pkix</groupId>
     <artifactId>pkix-ocsp</artifactId>
-    <version>2.3.0</version>
+    <version>2.5.0</version>
 </dependency>
 ```
 
