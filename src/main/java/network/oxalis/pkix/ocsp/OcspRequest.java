@@ -15,25 +15,28 @@ import org.bouncycastle.cert.ocsp.OCSPReqBuilder;
 
 import java.io.IOException;
 import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author erlend
  */
 class OcspRequest {
 
-    private List<Extension> extensions = new ArrayList<>();
+    private final List<Extension> extensions = new ArrayList<>();
 
-    private List<BigInteger> certificates = new ArrayList<>();
+    private final List<BigInteger> certificates = new ArrayList<>();
 
     private ASN1OctetString issuerNameHash;
 
     private ASN1OctetString issuerKeyHash;
 
     private AlgorithmIdentifier algorithmIdentifier;
+
+    private static final SecureRandom SECURE_RANDOM = new SecureRandom();
+
 
     public void setIssuer(CertificateIssuer certificateIssuer) {
         this.issuerNameHash = new DEROctetString(certificateIssuer.getIssuerNameHash());
@@ -44,7 +47,7 @@ class OcspRequest {
 
     public void addNonce() {
         byte[] nonce = new byte[16];
-        ThreadLocalRandom.current().nextBytes(nonce);
+        SECURE_RANDOM.nextBytes(nonce);
         addExtension(new Extension(OCSPObjectIdentifiers.id_pkix_ocsp_nonce, false, new DEROctetString(nonce)));
     }
 
@@ -71,8 +74,8 @@ class OcspRequest {
                         new ASN1Integer(certificate)))));
             }
 
-            if (extensions.size() > 0)
-                reqBuilder.setRequestExtensions(new Extensions(extensions.toArray(new Extension[extensions.size()])));
+            if (!extensions.isEmpty())
+                reqBuilder.setRequestExtensions(new Extensions(extensions.toArray(new Extension[0])));
 
             // Build OCSP Request.
             return reqBuilder.build().getEncoded();

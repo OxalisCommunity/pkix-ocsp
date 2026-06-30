@@ -1,5 +1,6 @@
 package network.oxalis.pkix.ocsp;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -13,6 +14,8 @@ public class OcspClientTest {
                 .set(OcspClient.EXCEPTION_ON_UNKNOWN, false)
                 .set(OcspClient.EXCEPTION_ON_REVOKED, false)
                 .build();
+
+        Assert.assertNotNull(client);
     }
 
 }

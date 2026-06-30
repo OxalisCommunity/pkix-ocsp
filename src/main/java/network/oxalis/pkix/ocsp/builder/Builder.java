@@ -22,10 +22,10 @@ public class Builder<T> {
     }
 
     public <S> Builder<T> set(Property<S> property, S value) {
-        Map<Property<?>, Object> map = new HashMap<>(this.map);
-        map.put(property, value);
+        Map<Property<?>, Object> propertyObjectMap = new HashMap<>(this.map);
+        propertyObjectMap.put(property, value);
 
-        return new Builder<>(buildHandler, map);
+        return new Builder<>(buildHandler, propertyObjectMap);
     }
 
     public T build() {

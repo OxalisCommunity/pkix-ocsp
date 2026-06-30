@@ -8,10 +8,12 @@ import network.oxalis.pkix.ocsp.builder.Property;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
 import org.apache.hc.client5.http.config.RequestConfig;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.client5.http.io.HttpClientConnectionManager;
+import org.apache.hc.core5.http.ClassicHttpResponse;
 import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.HttpHeaders;
+import org.apache.hc.core5.http.io.entity.BufferedHttpEntity;
 import org.apache.hc.core5.http.io.entity.ByteArrayEntity;
 import org.apache.hc.core5.util.Timeout;
 
@@ -46,10 +48,16 @@ public class ApacheOcspFetcher extends AbstractOcspFetcher {
     @Override
     public OcspFetcherResponse fetch(URI uri, byte[] content) throws IOException {
         HttpPost httpPost = new HttpPost(uri);
-        httpPost.setHeader("Content-Type", "application/ocsp-request");
-        httpPost.setHeader("Accept", "application/ocsp-response");
+        httpPost.setHeader(HttpHeaders.CONTENT_TYPE, "application/ocsp-request");
+        httpPost.setHeader(HttpHeaders.ACCEPT, "application/ocsp-response");
         httpPost.setEntity(new ByteArrayEntity(content, ContentType.create("application/ocsp-request")));
-        return new ApacheOcspFetcherResponse(getHttpClient().execute(httpPost));
+
+        return getHttpClient().execute(httpPost, response -> {
+            if (response.getEntity() != null) {
+                response.setEntity(new BufferedHttpEntity(response.getEntity()));
+            }
+            return new ApacheOcspFetcherResponse(response);
+        });
     }
 
     protected CloseableHttpClient getHttpClient() {
@@ -62,7 +70,7 @@ public class ApacheOcspFetcher extends AbstractOcspFetcher {
 
     protected RequestConfig getRequestConfig() {
         return RequestConfig.custom()
-                .setConnectTimeout(getTimeout(TIMEOUT_CONNECT))
+                .setConnectionRequestTimeout(getTimeout(TIMEOUT_CONNECT))
                 .setResponseTimeout(getTimeout(TIMEOUT_READ))
                 .setConnectionRequestTimeout(getTimeout(TIMEOUT_CONNECTION_MANAGER))
                 .build();
@@ -74,9 +82,9 @@ public class ApacheOcspFetcher extends AbstractOcspFetcher {
     }
 
     private static class ApacheOcspFetcherResponse implements OcspFetcherResponse {
-        private final CloseableHttpResponse response;
+        private final ClassicHttpResponse response;
 
-        public ApacheOcspFetcherResponse(CloseableHttpResponse response) {
+        public ApacheOcspFetcherResponse(ClassicHttpResponse response) {
             this.response = response;
         }
 
@@ -87,7 +95,7 @@ public class ApacheOcspFetcher extends AbstractOcspFetcher {
 
         @Override
         public String getContentType() {
-            return response.getFirstHeader("Content-Type").getValue();
+            return response.getFirstHeader(HttpHeaders.CONTENT_TYPE).getValue();
         }
 
         @Override

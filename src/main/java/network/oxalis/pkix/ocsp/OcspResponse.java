@@ -51,8 +51,8 @@ class OcspResponse {
         try {
             Object o = ocspResp.getResponseObject();
 
-            if (o instanceof BasicOCSPResp)
-                return parseBasicResponse((BasicOCSPResp) o);
+            if (o instanceof BasicOCSPResp basicResp)
+                return parseBasicResponse(basicResp);
 
             throw new OcspException("Parsing '%s' not supported.", o);
         } catch (OCSPException e) {

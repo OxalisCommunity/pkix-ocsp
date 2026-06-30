@@ -22,10 +22,10 @@ public class CertificateIssuer implements Serializable {
     private byte[] issuerKeyHash;
 
     public static CertificateIssuer generate(X509Certificate certificate) throws OcspException {
-        try {
-            // Digest calculator to be used to create values for the issuer certificate.
-            // This is done once in case of multiple requests.
-            OcspDigestOutputStream digestCalculator = new OcspDigestOutputStream("SHA-1");
+
+        // Digest calculator to be used to create values for the issuer certificate.
+        // This is done once in case of multiple requests.
+        try (OcspDigestOutputStream digestCalculator = new OcspDigestOutputStream("SHA-1") ){
 
             // Create an instance of the issuer certificate for use with Bouncy Caste/ASN1.
             X509CertificateHolder issuerHolder = new X509CertificateHolder(certificate.getEncoded());
