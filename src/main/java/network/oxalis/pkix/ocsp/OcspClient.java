@@ -26,12 +26,7 @@ public class OcspClient extends AbstractOcspClient {
      * @return Prepared client.
      */
     public static Builder<OcspClient> builder() {
-        return new Builder<>(new BuildHandler<OcspClient>() {
-            @Override
-            public OcspClient build(Properties properties) {
-                return new OcspClient(properties);
-            }
-        });
+        return new Builder<>(OcspClient::new);
     }
 
     /**

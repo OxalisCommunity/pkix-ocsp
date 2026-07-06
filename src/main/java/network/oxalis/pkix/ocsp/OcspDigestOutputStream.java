@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
  */
 class OcspDigestOutputStream extends OutputStream {
 
-    private MessageDigest messageDigest;
+    private final MessageDigest messageDigest;
 
     public OcspDigestOutputStream(String algorithm) {
         try {

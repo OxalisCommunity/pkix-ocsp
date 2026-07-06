@@ -9,6 +9,10 @@ import java.io.InputStream;
  */
 class IOHelper {
 
+    private IOHelper() {
+        // adding default private constructor to prevent instantiation in util class
+    }
+
     public static byte[] toByteArray(InputStream inputStream) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 

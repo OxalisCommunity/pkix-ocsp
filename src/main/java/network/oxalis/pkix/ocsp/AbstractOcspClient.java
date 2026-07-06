@@ -82,17 +82,14 @@ class AbstractOcspClient {
             AuthorityInformationAccess authInfo = AuthorityInformationAccess.getInstance(
                     JcaX509ExtensionUtils.parseExtensionValue(extensionValue));
 
-            for (AccessDescription accessDescription : authInfo.getAccessDescriptions())
-            {
+            for (AccessDescription accessDescription : authInfo.getAccessDescriptions()) {
                 ASN1ObjectIdentifier accessMethod = accessDescription.getAccessMethod();
                 GeneralName accessLocation = accessDescription.getAccessLocation();
 
-                if (X509ObjectIdentifiers.id_ad_ocsp.equals(accessMethod))
-                {
-                    if (GeneralName.uniformResourceIdentifier == accessLocation.getTagNo()) {
-                        ASN1IA5String uri = ASN1IA5String.getInstance(accessLocation.getName());
-                        return URI.create(new String(uri.getOctets()));
-                    }
+                if (X509ObjectIdentifiers.id_ad_ocsp.equals(accessMethod) &&
+                        accessLocation.getTagNo() == GeneralName.uniformResourceIdentifier) {
+                    ASN1IA5String uri = ASN1IA5String.getInstance(accessLocation.getName());
+                    return URI.create(new String(uri.getOctets()));
                 }
             }
         } catch (Exception e) {
