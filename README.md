@@ -8,6 +8,8 @@
 
 ## Getting started
 
+Requires Java 17 or newer.
+
 Include dependency in your pom.xml:
 
 ```xml
